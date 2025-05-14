@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nueva Habitación</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Formulario de Nueva Habitación</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/habitacion/crear}" th:object="${habitacion}" method="post">
+                        <div class="mb-3">
+                            <label for="tamano" class="form-label">Tamaño (m²):</label>
+                            <input type="number" class="form-control" id="tamano" th:field="*{tamano}" required/>
+                            <div class="text-danger small mt-1" th:if="${#fields.hasErrors('tamano')}" th:errors="*{tamano}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="capacidad" class="form-label">Capacidad:</label>
+                            <input type="number" class="form-control" id="capacidad" th:field="*{capacidad}" required/>
+                            <div class="text-danger small mt-1" th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="precioNoche" class="form-label">Precio por Noche:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">€</span>
+                                <input type="number" class="form-control" id="precioNoche" th:field="*{precioNoche}" step="0.01" required/>
+                            </div>
+                            <div class="text-danger small mt-1" th:if="${#fields.hasErrors('precioNoche')}" th:errors="*{precioNoche}"></div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="incluyeDesayuno" th:field="*{incluyeDesayuno}"/>
+                                    <label class="form-check-label" for="incluyeDesayuno">Incluye Desayuno</label>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('incluyeDesayuno')}" th:errors="*{incluyeDesayuno}"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="ocupada" th:field="*{ocupada}"/>
+                                    <label class="form-check-label" for="ocupada">¿Está ocupada?</label>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('ocupada')}" th:errors="*{ocupada}"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="nombreHotel" class="form-label">Nombre del Hotel:</label>
+                            <input type="text" class="form-control" id="nombreHotel" th:field="*{nombreHotel}" required/>
+                            <div class="text-danger small mt-1" th:if="${#fields.hasErrors('nombreHotel')}" th:errors="*{nombreHotel}"></div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Crear Habitación</button>
+                            <a class="btn btn-outline-secondary" th:href="@{/habitaciones}">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
